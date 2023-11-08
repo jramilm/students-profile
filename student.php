@@ -121,5 +121,84 @@ class Student {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+ 
+    /*
+        sample simple tests
+    */
+    public function testCreateStudent() {
+        $data = [
+            'student_number' => 'S12345',
+            'first_name' => 'John',
+            'middle_name' => 'Doe',
+            'last_name' => 'Smith',
+            'gender' => '1',
+            'birthday' => '1990-01-15',
+        ];
+
+        $student_id = $this->create($data);
+
+        if ($student_id !== null) {
+            echo "Test passed. Student created with ID: " . $student_id . PHP_EOL;
+            return $student_id;
+        } else {
+            echo "Test failed. Student creation unsuccessful." . PHP_EOL;
+        }
+    }
+
+    public function testReadStudent($id) {
+        $studentData = $this->read($id);
+
+        if ($studentData !== false) {
+            echo "Test passed. Student data read successfully: " . PHP_EOL;
+            print_r($studentData);
+        } else {
+            echo "Test failed. Unable to read student data." . PHP_EOL;
+        }
+    }
+
+    public function testUpdateStudent($id, $data) {
+        $success = $this->update($id, $data);
+
+        if ($success) {
+            echo "Test passed. Student data updated successfully." . PHP_EOL;
+        } else {
+            echo "Test failed. Unable to update student data." . PHP_EOL;
+        }
+    }
+
+    public function testDeleteStudent($id) {
+        $deleted = $this->delete($id);
+
+        if ($deleted) {
+            echo "Test passed. Student data deleted successfully." . PHP_EOL;
+        } else {
+            echo "Test failed. Unable to delete student data." . PHP_EOL;
+        }
+    }
 }
+
+
+$student = new Student(new Database());
+
+// Test the create method
+$student_id = $student->testCreateStudent();
+
+// Test the read method with the created student ID
+$student->testReadStudent($student_id);
+
+// Test the update method with the created student ID and updated data
+$update_data = [
+    'id' => $student_id,
+    'student_number' => 'S67890',
+    'first_name' => 'Alice',
+    'middle_name' => 'Jane',
+    'last_name' => 'Doe',
+    'gender' => '0',
+    'birthday' => '1995-05-20',
+];
+$student->testUpdateStudent($student_id, $update_data);
+
+// Test the delete method with the created student ID
+$student->testDeleteStudent($student_id);
+
 ?>
