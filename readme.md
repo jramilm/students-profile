@@ -18,6 +18,7 @@ To Dos:
 - Modify display in students table include some data from student_details table
 - Fix Gender display use 'F' or 'M' (do not change database structure)
 - Fix Birthdate display use 'Jan 1 2020' format.
+- Fix Delete of Student's Profile include student_details.
 <!--
 After the Code Session 2
 Using the skills you've learned from IM and DB2 create reports for this project
