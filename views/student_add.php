@@ -19,32 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();
     $student = new Student($database);
     $student_id = $student->create($data);
-    
-    if ($student_id) {
-        // Student record successfully created
-        
-        // Retrieve student details from the form
-        $studentDetailsData = [
-            'student_id' => $student_id, // Use the obtained student ID
-            'contact_number' => $_POST['contact_number'],
-            'street' => $_POST['street'],
-            'zip_code' => $_POST['zip_code'],
-            'town_city' => $_POST['town_city'],
-            'province' => $_POST['province'],
-            // Other student details fields
-        ];
-
-        // Create student details linked to the student
-        $studentDetails = new StudentDetails($database);
-        
-        if ($studentDetails->create($studentDetailsData)) {
-            echo "Record inserted successfully.";
-        } else {
-            echo "Failed to insert the record.";
-        }
-    }
-
-    
 }
 ?>
 

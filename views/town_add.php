@@ -13,23 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $town_city = new TownCity($database);
     $town_city_id = $town_city->create($data);
 
-    if ($town_city_id) {
-        //town city record successfully created
-
-        // Retrieve town city details from the form
-        $towncityDetails = [
-            'name' => $_POST['name'],
-        ];
-
-        // Create town city details linked to the town city
-        $towncityDetails = new TownCity($database);
-
-        if ($towncityDetails->create($towncityDetails)) {
-            echo "Record inserted successfully.";
-        } else {
-            echo "Failed to insert the record.";
-        }
-    }
     header("Location: towns.view.php");
 }
 ?>
