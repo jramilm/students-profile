@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="content">
     <h2>Edit Student Information</h2>
-    <form action="" method="post">
+    <form action="#" method="post">
         <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
         
         <label for="student_number">Student Number:</label>

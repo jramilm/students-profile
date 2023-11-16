@@ -181,13 +181,13 @@ class Student {
 $student = new Student(new Database());
 
 // Test the create method
-$student_id = $student->testCreateStudent();
+//$student_id = $student->testCreateStudent();
 
 // Test the read method with the created student ID
-$student->testReadStudent($student_id);
+//$student->testReadStudent($student_id);
 
 // Test the update method with the created student ID and updated data
-$update_data = [
+/**$update_data = [
     'id' => $student_id,
     'student_number' => 'S67890',
     'first_name' => 'Alice',
@@ -195,10 +195,10 @@ $update_data = [
     'last_name' => 'Doe',
     'gender' => '0',
     'birthday' => '1995-05-20',
-];
-$student->testUpdateStudent($student_id, $update_data);
+];**/
+//$student->testUpdateStudent($student_id, $update_data);
 
 // Test the delete method with the created student ID
-$student->testDeleteStudent($student_id);
+//$student->testDeleteStudent($student_id);
 
 ?>
