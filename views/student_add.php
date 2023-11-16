@@ -5,9 +5,6 @@ include_once("../student_details.php"); // Include the Student class file
 include_once("../town_city.php");
 include_once("../province.php");
 
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = [    
     'student_number' => $_POST['student_number'],

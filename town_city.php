@@ -57,9 +57,9 @@ class TownCity {
             $stmt->execute();
 
             // Fetch the student data as an associative array
-            $studentData = $stmt->fetch(PDO::FETCH_ASSOC);
+            $town_city = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $studentData;
+            return $town_city;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             throw $e; // Re-throw the exception for higher-level handling
