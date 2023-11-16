@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Failed to update the record.";
     }
+    header('Location: students.view.php');
 }
 ?>
 <!DOCTYPE html>
