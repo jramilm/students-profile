@@ -36,10 +36,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Call the edit method to update the student data
     if ($student->update($id, $data)) {
         echo "Record updated successfully.";
+        header('Location: students.view.php');
     } else {
         echo "Failed to update the record.";
     }
-    header('Location: students.view.php');
 }
 ?>
 <!DOCTYPE html>
