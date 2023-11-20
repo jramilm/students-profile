@@ -107,5 +107,4 @@ class Province {
     }
 }
 
-$province = new Province(new Database())
 ?>

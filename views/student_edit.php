@@ -1,6 +1,7 @@
 <?php
 include_once("../db.php"); // Include the Database class file
 include_once("../student.php"); // Include the Student class file
+include_once("../student_details.php"); // Include the Student Details class file
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -10,9 +11,7 @@ if (isset($_GET['id'])) {
     $student = new Student($db);
     $studentData = $student->read($id); // Implement the read method in the Student class
 
-    if ($studentData) {
-        // The student data is retrieved, and you can pre-fill the edit form with this data.
-    } else {
+    if (!$studentData) {
         echo "Student not found.";
     }
 } else {
@@ -71,9 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <label for="last_name">Last Name:</label>
         <input type="text" name="last_name" id="last_name" value="<?php echo $studentData['last_name']; ?>">
-        
+
         <label for="gender">Gender:</label>
-        <input type="text" name="gender" id="gender" value="<?php echo $studentData['gender']; ?>">
+        <select name="gender" id="gender" required>
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select>
         
         <label for="birthday">Birthdate:</label>
         <input type="text" name="birthday" id="birthday" value="<?php echo $studentData['birthday']; ?>">

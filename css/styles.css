@@ -1,6 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 .sidebar {
     position: fixed;
-    width: 250px;
+    width: 185px;
     height: 100%;
     background-color: #D8F3DC; /* Background color using the provided hex code */
     color: #74C69D; /* Text color using the provided hex code */
@@ -28,7 +32,7 @@
 }
 
 .content {
-    margin-left: 270px; /* Adjust to match the sidebar width */
+    margin-left: 180px; /* Adjust to match the sidebar width */
     padding: 50px;
 }
 
@@ -220,7 +224,7 @@ footer {
 
 .footer-links a {
     text-decoration: none;
-    color: #fff;
+    color: #000;
 }
 
 /* Change font color for links on hover */

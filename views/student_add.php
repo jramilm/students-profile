@@ -7,18 +7,29 @@ include_once("../province.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = [    
-    'student_number' => $_POST['student_number'],
-    'first_name' => $_POST['first_name'],
-    'middle_name' => $_POST['middle_name'],
-    'last_name' => $_POST['last_name'],
-    'gender' => $_POST['gender'],
-    'birthday' => $_POST['birthday'],
+        'student_number' => $_POST['student_number'],
+        'first_name' => $_POST['first_name'],
+        'middle_name' => $_POST['middle_name'],
+        'last_name' => $_POST['last_name'],
+        'gender' => $_POST['gender'],
+        'birthday' => $_POST['birthday'],
+        'contact_num' => $_POST['contact_number'],
+        'street' => $_POST['street'],
+        'town_city' => $_POST['town_city'],
+        'province' => $_POST['province'],
+        'zip' => $_POST['zip_code']
     ];
 
     // Instantiate the Database and Student classes
     $database = new Database();
+    // create data in student table
     $student = new Student($database);
     $student_id = $student->create($data);
+    // create data in student_details table
+    $student_details = new StudentDetails($database);
+    $student_details_id = $student_details->create($data);
+
+    header("Location: students.view.php");
 }
 ?>
 
@@ -72,7 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="town_city">Town / City:</label>
         <select name="town_city" id="town_city" required>
         <?php
-
             $database = new Database();
             $towns = new TownCity($database);
             $results = $towns->getAll();
@@ -87,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="province">Province:</label>
         <select name="province" id="province" required>
         <?php
-
             $database = new Database();
             $provinces = new Province($database);
             $results = $provinces->getAll();
@@ -101,10 +110,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="zip_code">Zip Code:</label>
         <input type="text" id="zip_code" name="zip_code" required>
-
-        
-
-
         <input type="submit" value="Add Student">
     </form>
     </div>

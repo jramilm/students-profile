@@ -1,11 +1,11 @@
 <?php
 include_once("../db.php");
 include_once("../student.php");
+include_once("../student_details.php");
 
 $db = new Database();
 $connection = $db->getConnection();
 $student = new Student($db);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +26,12 @@ $student = new Student($db);
         <thead>
             <tr>
                 <th>Student Number</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
+                <th>Full Name</th>
+                <th>Contact Number</th>
                 <th>Gender</th>
                 <th>Birthdate</th>
+                <th>Town ID</th>
+                <th>Province ID</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -40,16 +41,17 @@ $student = new Student($db);
             
             
             <?php
-            $results = $student->displayAll(); 
+            $results = $student->displayAllWithDetails();
             foreach ($results as $result) {
             ?>
             <tr>
                 <td><?php echo $result['student_number']; ?></td>
-                <td><?php echo $result['first_name']; ?></td>
-                <td><?php echo $result['middle_name']; ?></td>
-                <td><?php echo $result['last_name']; ?></td>
-                <td><?php echo $result['gender']; ?></td>
-                <td><?php echo $result['birthday']; ?></td>
+                <td><?php echo $result['first_name'] . " " . $result['middle_name'] . " " . $result['last_name']; ?></td>
+                <td><?php echo $result['contact_number']; ?></td>
+                <td><?php if($result['gender'] == '0') {echo 'M';} else {echo 'F';}?></td>
+                <td><?php echo date("M j Y", strtotime($result['birthday'])); ?></td>
+                <td><?php echo $result['town_city']; ?></td>
+                <td><?php echo $result['province']; ?></td>
                 <td>
                     <a href="student_edit.php?id=<?php echo $result['id']; ?>">Edit</a>
                     |

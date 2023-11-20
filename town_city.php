@@ -107,6 +107,4 @@ class TownCity {
     }
 }
 
-$town_city = new TownCity(new Database())
-
 ?>

@@ -121,6 +121,20 @@ class Student {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+
+    public function displayAllWithDetails(){
+        try {
+            $sql = "SELECT * FROM students JOIN student_details ON student_number = student_details.student_id LIMIT 10";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            // Handle any potential errors here
+            echo "Error: " . $e->getMessage();
+            throw $e; // Re-throw the exception for higher-level handling
+        }
+    }
  
     /*
         sample simple tests
@@ -176,29 +190,5 @@ class Student {
         }
     }
 }
-
-
-$student = new Student(new Database());
-
-// Test the create method
-//$student_id = $student->testCreateStudent();
-
-// Test the read method with the created student ID
-//$student->testReadStudent($student_id);
-
-// Test the update method with the created student ID and updated data
-/**$update_data = [
-    'id' => $student_id,
-    'student_number' => 'S67890',
-    'first_name' => 'Alice',
-    'middle_name' => 'Jane',
-    'last_name' => 'Doe',
-    'gender' => '0',
-    'birthday' => '1995-05-20',
-];**/
-//$student->testUpdateStudent($student_id, $update_data);
-
-// Test the delete method with the created student ID
-//$student->testDeleteStudent($student_id);
 
 ?>
