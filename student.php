@@ -43,7 +43,7 @@ class Student {
         try {
             $connection = $this->db->getConnection();
 
-            $sql = "SELECT * FROM students WHERE id = :id";
+            $sql = "SELECT * FROM students JOIN student_details sd ON student_number = sd.student_id WHERE students.id = :id";
             $stmt = $connection->prepare($sql);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
@@ -60,14 +60,20 @@ class Student {
 
     public function update($id, $data) {
         try {
-            $sql = "UPDATE students SET
+            $sql = "UPDATE students JOIN student_details sd ON student_number = sd.student_id SET
                     student_number = :student_number,
+                    student_id = :student_number,
                     first_name = :first_name,
                     middle_name = :middle_name,
                     last_name = :last_name,
                     gender = :gender,
-                    birthday = :birthday
-                    WHERE id = :id";
+                    birthday = :birthday,
+                    contact_number = :contact_number,
+                    street = :street,
+                    town_city = :town_city,
+                    province = :province,
+                    zip_code = :zip
+                    WHERE students.id = :id";
 
             $stmt = $this->db->getConnection()->prepare($sql);
             // Bind parameters
@@ -78,6 +84,11 @@ class Student {
             $stmt->bindValue(':last_name', $data['last_name']);
             $stmt->bindValue(':gender', $data['gender']);
             $stmt->bindValue(':birthday', $data['birthday']);
+            $stmt->bindValue(':contact_number', $data['contact_num']);
+            $stmt->bindValue(':town_city', $data['town_city']);
+            $stmt->bindValue(':province', $data['province']);
+            $stmt->bindValue(':street', $data['street']);
+            $stmt->bindValue(':zip', $data['zip']);
 
             // Execute the query
             $stmt->execute();

@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <!-- Include the header and navbar -->
-    <?php include('../templates/header.html'); ?>
     <?php include('../includes/navbar.php'); ?>
 
     <div class="content">
@@ -78,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="street">Street:</label>
         <input type="text" id="street" name="street" required>
 
-        
+
 
         <label for="town_city">Town / City:</label>
         <select name="town_city" id="town_city" required>
@@ -91,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 echo '<option value="' . $result['id'] . '">' . $result['name'] . '</option>';
             }
-        ?>      
+        ?>
         </select>
 
         <label for="province">Province:</label>
@@ -105,8 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             {
                 echo '<option value="' . $result['id'] . '">' . $result['name'] . '</option>';
             }
-        ?>  
-        </select>    
+        ?>
+        </select>
 
         <label for="zip_code">Zip Code:</label>
         <input type="text" id="zip_code" name="zip_code" required>

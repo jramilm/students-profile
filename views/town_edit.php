@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <!-- Include the header and navbar -->
-<?php include('../templates/header.html'); ?>
 <?php include('../includes/navbar.php'); ?>
 
 <div class="content">

@@ -17,11 +17,12 @@
         </ul>
 </div>
 -->
-
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none;" id="sidebar">
-  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <a href="/students-profile/index.php" class="w3-bar-item w3-button">Home</a>
+  <button onclick="w3_close()" class="w3-bar-item w3-large w3-button">Close &times;</button>
+  <hr class="thin" />
+  <a href="/students-profile/index.php" class="w3-bar-item w3-button">Dashboard</a>
   <a href="/students-profile/views/students.view.php" class="w3-bar-item w3-button">Students</a>
   <a href="/students-profile/views/towns.view.php" class="w3-bar-item w3-button">Town</a>
   <a href="/students-profile/views/province.view.php" class="w3-bar-item w3-button">Province</a>

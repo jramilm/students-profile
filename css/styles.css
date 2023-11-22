@@ -251,3 +251,12 @@ footer {
 .indent {
 	margin-left: 15px
 }
+
+@media print{
+    @page {size: landscape
+    }
+}
+
+.thin {
+    margin: 5px 0;
+}
