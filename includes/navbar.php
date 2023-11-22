@@ -28,7 +28,7 @@
   <a href="/students-profile/views/province.view.php" class="w3-bar-item w3-button">Province</a>
 </div>
 
-<div class="w3-teal flex">
+<div class="w3-teal">
   <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
   <div class="w3-container indent">
     <h1>Students Profile</h1>

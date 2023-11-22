@@ -146,6 +146,17 @@ class Student {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+
+    public function getGenderData(){
+        try {
+            $sql = "SELECT gender, COUNT(*) as count FROM students GROUP BY gender";
+            $stmt= $this->db->getConnection()->query($sql);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
  
     /*
         sample simple tests

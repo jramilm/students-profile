@@ -244,8 +244,13 @@ footer {
     color: #74C69D;
 }
 
+.w3-teal {
+    display: flex;
+}
+
 .flex {
 	display: flex;
+    justify-content: space-evenly;
 }
 
 .indent {
