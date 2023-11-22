@@ -157,6 +157,32 @@ class Student {
             echo "Connection failed: " . $e->getMessage();
         }
     }
+
+    public function getPopulationData() {
+        try {
+
+            $sql = "
+                    SELECT
+                        p.name as province_name,
+                        tc.name as town_name,
+                        COUNT(sd.id) as count
+                    FROM
+                        student_details sd
+                    JOIN
+                        town_city tc ON sd.town_city = tc.id
+                    JOIN
+                        province p ON sd.province = p.id
+                    GROUP BY
+                        p.name, tc.name
+                   ";
+
+            $stmt = $this->db->getConnection()->query($sql);
+            // print_r($stmt->fetchAll(PDO::FETCH_ASSOC));
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
  
     /*
         sample simple tests
