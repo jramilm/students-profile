@@ -37,7 +37,7 @@
 .content {
     margin-left: 25px; /* Adjust to match the sidebar width */
     padding: 50px;
-	margin-bottom: 183px;
+	margin-bottom: 30px;
 }
 
 /* Highlight the selected menu item */
@@ -264,4 +264,8 @@ footer {
 
 .thin {
     margin: 5px 0;
+}
+
+.card-body-2 {
+    margin-top: 80px;
 }

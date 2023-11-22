@@ -183,6 +183,25 @@ class Student {
             echo "Connection failed: " . $e->getMessage();
         }
     }
+
+    public function getBirthYearData() {
+        try {
+            $sql = "
+                    SELECT
+                        YEAR(birthday) as birth_year,
+                        COUNT(id) as count
+                    FROM
+                        students
+                    GROUP BY
+                        birth_year
+                  ";
+
+            $stmt = $this->db->getConnection()->query($sql);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
  
     /*
         sample simple tests

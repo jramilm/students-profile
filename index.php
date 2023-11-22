@@ -8,6 +8,7 @@ $student = new Student($db);
 
 $data = $student->getGenderData();
 $data2 = $student->getPopulationData();
+$data3 = $student->getBirthYearData();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +33,12 @@ $data2 = $student->getPopulationData();
             <hr>
             <canvas id="populationChart" width="350" height="350"></canvas>
         </div>
-    </div class="flex">
+    </div>
+    <div class="card-body-2">
+        <h2>Students Birth Year Chart</h2>
+        <hr>
+        <canvas id="yearLine" height="100"></canvas>
+    </div>
 </div>
 </body>
 <?php include('templates/footer.html'); ?>
@@ -94,7 +100,6 @@ $data2 = $student->getPopulationData();
     datasets[province].push(count);
     <?php endforeach; ?>
 
-    // Create Chart
     const population = document.getElementById('populationChart').getContext('2d');
     const barChart = new Chart(population, {
         type: 'bar',
@@ -114,6 +119,57 @@ $data2 = $student->getPopulationData();
             scales: {
                 x: { stacked: false },
                 y: { stacked: false }
+            }
+        }
+    });
+</script>
+
+<script>
+    var labels = [];
+    var counts = [];
+
+    <?php foreach ($data3 as $item): ?>
+    labels.push(<?php echo $item["birth_year"]; ?>);
+    counts.push(<?php echo $item["count"]; ?>);
+    <?php endforeach; ?>
+
+    const totalStudents = counts.reduce((total, count) => total + count, 0);
+    const percentages = counts.map(count => (count / totalStudents) * 100);
+
+    const birthChart = document.getElementById('yearLine').getContext('2d');
+    const lineChart = new Chart(birthChart, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Birth Year Percentage',
+                data: percentages,
+                borderColor: 'blue',
+                fill: true
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Birth Year Percentage Chart'
+            },
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Birth Year'
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Percentage'
+                    }
+                }
             }
         }
     });
