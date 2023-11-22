@@ -17,7 +17,6 @@ $town_city = new TownCity($db);
 </head>
 <body>
 <!-- Include the header -->
-<?php include('../templates/header.html'); ?>
 <?php include('../includes/navbar.php'); ?>
 
 <div class="content">

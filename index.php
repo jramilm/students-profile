@@ -17,14 +17,10 @@ $student = new Student($db);
 </head>
 <body>
     <!-- Include the header -->
-    <?php include('templates/header.html'); ?>
     <?php include('includes/navbar.php'); ?>
-
 
 <div class="content">
 </div>
-
-        <!-- Include the footer -->
-    <?php include('templates/footer.html'); ?>
 </body>
+<?php include('templates/footer.html'); ?>
 </html>

@@ -3,12 +3,14 @@
 }
 
 .sidebar {
-    position: fixed;
-    width: 185px;
-    height: 100%;
-    background-color: #D8F3DC; /* Background color using the provided hex code */
-    color: #74C69D; /* Text color using the provided hex code */
-    padding: 20px;
+    position: absolute;
+    width: 118px;
+    height: 42%;
+    background-color: #292929;
+    color: #ffffff;
+    padding: 11px;
+    border-radius: 1px 10px 10px 0px;
+    margin-top: 0px;
 }
 
 .sidebar h1 {
@@ -19,6 +21,7 @@
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin-top: 27.6px;
 }
 
 .sidebar li {
@@ -27,13 +30,14 @@
 
 .sidebar a {
     text-decoration: none;
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #d2d6d4;
     font-size: 18px;
 }
 
 .content {
-    margin-left: 180px; /* Adjust to match the sidebar width */
+    margin-left: 25px; /* Adjust to match the sidebar width */
     padding: 50px;
+	margin-bottom: 183px;
 }
 
 /* Highlight the selected menu item */
@@ -48,11 +52,7 @@ body {
     color: #333; /* Text color */
     margin: 0;
     padding: 0;
-}
-
-/* Header */
-h1 {
-    color: #74C69D; /* Header color using the provided hex code */
+	
 }
 
 /* Existing CSS remains the same */
@@ -65,23 +65,28 @@ h1 {
 
 .dropdown .dropbtn {
     text-decoration: none;
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #d2d6d4;
     font-size: 18px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #D8F3DC; /* Background color for the dropdown using the provided hex code */
-    min-width: 160px;
+    background-color: #f6f6f6;
+    min-width: 115px;
     z-index: 1;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
-    color: #74C69D; /* Text color using the provided hex code */
+    color: #00000f; /* Text color using the provided hex code */
     text-decoration: none;
     display: block;
     padding: 10px;
+}
+
+.dropdown-content a:hover {
+	color: #555252e6;
 }
 
 .dropdown:hover .dropdown-content {
@@ -200,16 +205,23 @@ header {
 
 /* Footer */
 footer {
-    background-color: #D8F3DC;
-    color: #fff;
-    padding: 20px 0;
+    background-color: #272523;
+    color: #fff2f2;
+    padding: 0px 0px;
     text-align: center;
+    height: 50px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+    width: 100%;
 }
 
 .footer-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    gap: 550px;
+    padding-top: 0px;
 }
 
 .footer-links {
@@ -224,10 +236,18 @@ footer {
 
 .footer-links a {
     text-decoration: none;
-    color: #000;
+    color: #fff;
 }
 
 /* Change font color for links on hover */
 .footer-links a:hover {
     color: #74C69D;
+}
+
+.flex {
+	display: flex;
+}
+
+.indent {
+	margin-left: 15px
 }

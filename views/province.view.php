@@ -17,7 +17,6 @@ $province = new Province($db);
 </head>
 <body>
 <!-- Include the header -->
-<?php include('../templates/header.html'); ?>
 <?php include('../includes/navbar.php'); ?>
 
 <div class="content">
@@ -57,8 +56,5 @@ $province = new Province($db);
 <!-- Include the header -->
 
 <?php include('../templates/footer.html'); ?>
-
-
-<p></p>
 </body>
 </html>
