@@ -9,9 +9,32 @@ class Province {
     }
 
     public function getAll() {
+		$recordsPerPage = 10;
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $offset = ($page - 1) * $recordsPerPage;
+		
         try {
-            $sql = "SELECT * FROM province";
+            $sql = "SELECT * FROM province p";
+
+            if (!empty($search)) {
+                $searchParam = "%$search%";
+                $sql .= "
+                            WHERE p.name LIKE :searchParam
+                        ";
+            }
+
+            $sql .= " ORDER BY p.name LIMIT :limit OFFSET :offset";
+
             $stmt = $this->db->getConnection()->prepare($sql);
+
+            if (!empty($search)) {
+                $stmt->bindParam(':searchParam', $searchParam, PDO::PARAM_STR);
+            }
+
+            $stmt->bindValue(':limit', $recordsPerPage, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,6 +43,20 @@ class Province {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+	
+	public function displayAll() {
+		try {
+            $sql = "SELECT * FROM province";
+
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Handle errors (log or display)
+            throw $e; // Re-throw the exception for higher-level handling
+        }
+	}
 
     public function create($data) {
         try {
@@ -101,6 +138,37 @@ class Province {
                 return false; // No records were deleted (province_id not found)
             }
         } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            throw $e; // Re-throw the exception for higher-level handling
+        }
+    }
+	
+	public function getProvinceCount() {
+        $conn = $this->db->getConnection();
+
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+        try {
+            $sql = "SELECT COUNT(*) as total FROM province p";
+
+            if (!empty($search)) {
+                $searchParam = "%$search%";
+                $sql .= "
+                            WHERE p.name LIKE :searchParam
+                        ";
+            }
+
+            $stmt = $conn->prepare($sql);
+
+            if (!empty($search)) {
+                $stmt->bindParam(':searchParam', $searchParam, PDO::PARAM_STR);
+            }
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result[0]['total'];
+        } catch (PDOException $e) {
+            // Handle any potential errors here
             echo "Error: " . $e->getMessage();
             throw $e; // Re-throw the exception for higher-level handling
         }

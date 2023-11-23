@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="content">
     <h2>Edit Student Information</h2>
-    <form action="#" method="post">
+    <form action="#" method="post" name="form_edit">
         <input type="hidden" name="id" value="<?php echo $studentData['id']; ?>">
 
         <label for="student_number">Student Number:</label>
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php
             $db = new Database();
             $towns = new TownCity($db);
-            $results = $towns->getAll();
+            $results = $towns->displayAll();
             // echo print_r($results);
             foreach($results as $result)
             {
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <select name="province" id="province" required>
         <?php
             $provinces = new Province($db);
-            $results = $provinces->getAll();
+            $results = $provinces->displayAll();
             // echo print_r($results);
             foreach($results as $result)
             {

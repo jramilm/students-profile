@@ -134,12 +134,88 @@ class Student {
     }
 
     public function displayAllWithDetails(){
+        $conn = $this->db->getConnection();
+
+        $recordsPerPage = 10;
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $offset = ($page - 1) * $recordsPerPage;
+
         try {
-            $sql = "SELECT * FROM students JOIN student_details ON student_number = student_details.student_id LIMIT 10";
-            $stmt = $this->db->getConnection()->prepare($sql);
+            $sql = "SELECT * FROM students s JOIN student_details sd ON student_number = sd.student_id";
+
+            if (!empty($search)) {
+                $searchParam = "%$search%";
+                $sql .= "
+                            WHERE (CONCAT(s.last_name, ' ', s.first_name) LIKE :searchParam1 OR
+                            CONCAT(s.first_name, ' ', s.last_name) LIKE :searchParam2 OR
+                            s.student_number LIKE :searchParam3 OR
+                            sd.contact_number LIKE :searchParam4 OR
+                            sd.street LIKE :searchParam5 OR
+                            s.middle_name LIKE :searchParam6)
+                        ";
+            }
+
+            $sql .= " ORDER BY s.student_number LIMIT :limit OFFSET :offset";
+
+            $stmt = $conn->prepare($sql);
+
+            if (!empty($search)) {
+                $stmt->bindParam(':searchParam1', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam2', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam3', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam4', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam5', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam6', $searchParam, PDO::PARAM_STR);
+            }
+
+            $stmt->bindValue(':limit', $recordsPerPage, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+        } catch (PDOException $e) {
+            // Handle any potential errors here
+            echo "Error: " . $e->getMessage();
+            throw $e; // Re-throw the exception for higher-level handling
+        }
+    }
+
+    public function getStudentsCount() {
+        $conn = $this->db->getConnection();
+
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+        try {
+            $sql = "SELECT COUNT(*) as total FROM students s JOIN student_details sd ON student_number = sd.student_id";
+
+            if (!empty($search)) {
+                $searchParam = "%$search%";
+                $sql .= "
+                            WHERE (CONCAT(s.last_name, ' ', s.first_name) LIKE :searchParam1 OR
+                            CONCAT(s.first_name, ' ', s.last_name) LIKE :searchParam2 OR
+                            s.student_number LIKE :searchParam3 OR
+                            sd.contact_number LIKE :searchParam4 OR
+                            sd.street LIKE :searchParam5 OR
+                            s.middle_name LIKE :searchParam6)
+                        ";
+            }
+
+            $stmt = $conn->prepare($sql);
+
+            if (!empty($search)) {
+                $stmt->bindParam(':searchParam1', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam2', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam3', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam4', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam5', $searchParam, PDO::PARAM_STR);
+                $stmt->bindParam(':searchParam6', $searchParam, PDO::PARAM_STR);
+            }
+
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result[0]['total'];
         } catch (PDOException $e) {
             // Handle any potential errors here
             echo "Error: " . $e->getMessage();

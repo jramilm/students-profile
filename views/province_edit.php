@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="content">
     <h2>Edit Province Name</h2>
-    <form action="#" method="post">
+    <form action="#" method="post" name="form_edit">
         <input type="hidden" name="id" value="<?php echo $province_data['id']; ?>"/>
 
         <label for="name">Province Name:</label>

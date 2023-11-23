@@ -38,6 +38,7 @@
     margin-left: 25px; /* Adjust to match the sidebar width */
     padding: 50px;
 	margin-bottom: 30px;
+	padding-top: 20px;
 }
 
 /* Highlight the selected menu item */
@@ -101,6 +102,7 @@ table {
     background-color: #D8F3DC; /* Table background color using the provided hex code */
     border: 1px solid #95D5B2; /* Table border color using the provided hex code */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	font-size: 14px
 }
 
 th, td {
@@ -139,9 +141,9 @@ label {
     color: #74C69D; /* Text color using the provided hex code */
 }
 
-input[type="text"],
-input[type="date"],
-select {
+form > input[type="text"],
+form > input[type="date"],
+form > select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -251,15 +253,16 @@ footer {
 .flex {
 	display: flex;
     justify-content: space-evenly;
+	align-items: center;
+}
+
+.flex-between {
+	display: flex;
+    justify-content: space-between;
 }
 
 .indent {
 	margin-left: 15px
-}
-
-@media print{
-    @page {size: landscape
-    }
 }
 
 .thin {
@@ -279,4 +282,73 @@ footer {
     padding: 20px 40px;
     border-radius: 8px;
     box-shadow: 2px 2px 5px 0px;
+}
+
+.pagination {
+    text-align: center;
+	margin-top: 15px;
+}
+
+.page-link {
+    width: 30px;
+    height: 33px;
+    border-radius: 10px;
+    background-color: #74c69b;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    display: inline-block;
+    padding-top: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+	margin: 0px 3px;
+}
+
+.page-link:hover {
+    opacity: 1;
+    visibility: visible;
+    background-color: #3DAC78;
+}
+
+td > .button-link {
+    padding: 7px 8px;
+}
+
+.search {
+  width: 150px;
+  padding: 10px 0px 10px 35px;
+  border-radius: 20px;
+  border: solid 1px #333;
+  transition: all .2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+  height: 37px;
+}
+
+.container-search {
+  position: relative;
+  text-align: left;
+}
+
+.container-search svg {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 10px;
+}
+
+.search:focus {
+  opacity: 1;
+  width: 250px;
+}
+
+.searchForm {
+	background-color: unset;
+	border: None;
+	padding: 0;
+	box-shadow: 0 0 0;
+	width: 100%;
 }
