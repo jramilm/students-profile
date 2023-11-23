@@ -24,18 +24,18 @@ $data3 = $student->getBirthYearData();
 <div class="content">
     <div class="flex">
         <div class="card-body">
-            <h2>Gender Percentage Chart</h2>
+            <h2>Gender Percentage Report</h2>
             <hr>
             <canvas id="genderPie" width="250" height="250"></canvas>
         </div>
         <div class="card-body">
-            <h2>Population Chart</h2>
+            <h2>Population Report</h2>
             <hr>
             <canvas id="populationChart" width="350" height="350"></canvas>
         </div>
     </div>
     <div class="card-body-2">
-        <h2>Students Birth Year Chart</h2>
+        <h2>Students Birth Year Report</h2>
         <hr>
         <canvas id="yearLine" height="100"></canvas>
     </div>
